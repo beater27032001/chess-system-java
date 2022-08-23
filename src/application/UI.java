@@ -7,7 +7,11 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 
 public class UI {
-
+	
+	public static void clearScrenn() {
+		System.out.flush();
+	}
+	
 	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
 			String s = sc.nextLine();
