@@ -13,6 +13,8 @@ import chess.Color;
 
 public class UI {
 
+	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
@@ -32,7 +34,8 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-	public static void clearScrenn() {
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void clearScreen() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
@@ -54,8 +57,8 @@ public class UI {
 		printCapturedPieces(captured);
 		System.out.println();
 		System.out.println("Turn : " + chessMatch.getTurn());
-		if (!chessMatch.getcheckMate()) {
-			System.out.println("Wating player: " + chessMatch.getCurrentPlayer());
+		if (!chessMatch.getCheckMate()) {
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
 			if (chessMatch.getCheck()) {
 				System.out.println("CHECK!");
 			}
@@ -63,7 +66,6 @@ public class UI {
 			System.out.println("CHECKMATE!");
 			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
 		}
-
 	}
 
 	public static void printBoard(ChessPiece[][] pieces) {
@@ -93,12 +95,12 @@ public class UI {
 			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
 		if (piece == null) {
-			System.out.println("-" + ANSI_RESET);
+			System.out.print("-" + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.WHITE) {
-				System.out.println(ANSI_WHITE + piece + ANSI_RESET);
+				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			} else {
-				System.out.println(ANSI_YELLOW + piece + ANSI_RESET);
+				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
 			}
 		}
 		System.out.print(" ");
@@ -109,8 +111,7 @@ public class UI {
 				.collect(Collectors.toList());
 		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK)
 				.collect(Collectors.toList());
-
-		System.out.println("Captured pieces: ");
+		System.out.println("Captured pieces:");
 		System.out.print("White: ");
 		System.out.print(ANSI_WHITE);
 		System.out.println(Arrays.toString(white.toArray()));
@@ -119,7 +120,5 @@ public class UI {
 		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(black.toArray()));
 		System.out.print(ANSI_RESET);
-
 	}
-
 }
